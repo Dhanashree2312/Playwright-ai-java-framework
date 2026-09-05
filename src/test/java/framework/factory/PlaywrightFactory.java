@@ -16,10 +16,12 @@ public class PlaywrightFactory {
 
         String browserType = ConfigReader.get("browser");
 
-        boolean headless =
-                Boolean.parseBoolean(
+        boolean headless = Boolean.parseBoolean(
+                System.getProperty(
+                        "headless",
                         ConfigReader.get("headless")
-                );
+                )
+        );
 
         BrowserType.LaunchOptions options =
                 new BrowserType.LaunchOptions()
