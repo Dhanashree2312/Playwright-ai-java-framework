@@ -1,7 +1,23 @@
 target/
 .idea/
 *.iml
-.kotlin
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Environment / secrets
+.env
+*.env
+
+# Playwright
+playwright-report/
+test-results/
+
+# Logs
+*.log
 
 ### Maven ###
 !.mvn/wrapper/maven-wrapper.jar
