@@ -1,10 +1,12 @@
-name: Playwright Tests
+name: Playwright AI Framework Tests
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   test:
@@ -21,9 +23,16 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Install Playwright browsers
-        run: mvn dependency:go-offline
-        shell: bash
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Run tests
-        run: mvn test -Dheadless=true
+      - name: Install Playwright Chromium
+        run: npx -y playwright@1.55.0 install --with-deps chromium
+
+      - name: Run UI and API tests
+        run: >
+          mvn test
+          -Dheadless=true
+          -Dtest="FirstPlaywrightTest,LoginTest,APITest,CreateUserTest,DeleteUserTest,GetUserByQueryTest,UpdateUserTest,UserApiTest,UserQueryTest"
